@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import clsx from 'clsx';
 
-export default function NavLink({ active = false, className = '', children, ...props }) {
+export default function NavLink({  className = '', children, ...props }) {
 
     return (
         <Link
