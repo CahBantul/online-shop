@@ -15,10 +15,11 @@ export default function Navbar() {
                     <ApplicationLogo className="w-8 h-8 fill-red-500" />
                     <div className="flex items-center gap-x-6">
                         <NavLink href="/">Home </NavLink>
-                        <NavLink href="/dashboard">Dashboard </NavLink>
+                        <NavLink href="/products">Products </NavLink>
                         {auth.user ? (
                             <>
                                 <DropdownMenu label={auth.user.name}>
+                                    <DropdownMenu.Link href={"/dashboard"}>Dashboard</DropdownMenu.Link>
                                     <DropdownMenu.Link href={"/profile"}>Profile</DropdownMenu.Link>
                                     <DropdownMenu.Link href={"/cart"}>Your Cart</DropdownMenu.Link>
                                     <DropdownMenu.Link href={"/history"}>Your History</DropdownMenu.Link>

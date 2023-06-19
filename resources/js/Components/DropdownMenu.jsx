@@ -30,7 +30,7 @@ function DropdownMenu({ label, children }) {
                         </svg>
                     </Menu.Button>
 
-                    <Menu.Items className={"bg-white py-1 rounded border absolute w-64 top-full mt-2 right-0"}>
+                    <Menu.Items className={"bg-white py-1 rounded-lg shadow-sm border absolute w-64 top-full mt-2 right-0"}>
                         {children}
                     </Menu.Items>
                 </>
