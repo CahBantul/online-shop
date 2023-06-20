@@ -6,7 +6,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import DropdownMenu from "@/Components/DropdownMenu";
 
 export default function Navbar() {
-    const { auth } = usePage().props;
+    const { auth, categories_global } = usePage().props;
 
     return (
         <nav className="bg-white  border-b py-2">
@@ -16,14 +16,37 @@ export default function Navbar() {
                     <div className="flex items-center gap-x-6">
                         <NavLink href="/">Home </NavLink>
                         <NavLink href="/products">Products </NavLink>
+                        <DropdownMenu label={"Categories"}>
+                            {categories_global.map((category) => (
+                                <DropdownMenu.Link
+                                    key={category.slug}
+                                    href={`/products?category=${category.slug}`}
+                                >
+                                    {category.name}
+                                </DropdownMenu.Link>
+                            ))}
+                        </DropdownMenu>
                         {auth.user ? (
                             <>
                                 <DropdownMenu label={auth.user.name}>
-                                    <DropdownMenu.Link href={"/dashboard"}>Dashboard</DropdownMenu.Link>
-                                    <DropdownMenu.Link href={"/profile"}>Profile</DropdownMenu.Link>
-                                    <DropdownMenu.Link href={"/cart"}>Your Cart</DropdownMenu.Link>
-                                    <DropdownMenu.Link href={"/history"}>Your History</DropdownMenu.Link>
-                                    <DropdownMenu.Link href="/logout" method="post">Logout </DropdownMenu.Link>
+                                    <DropdownMenu.Link href={"/dashboard"}>
+                                        Dashboard
+                                    </DropdownMenu.Link>
+                                    <DropdownMenu.Link href={"/profile"}>
+                                        Profile
+                                    </DropdownMenu.Link>
+                                    <DropdownMenu.Link href={"/cart"}>
+                                        Your Cart
+                                    </DropdownMenu.Link>
+                                    <DropdownMenu.Link href={"/history"}>
+                                        Your History
+                                    </DropdownMenu.Link>
+                                    <DropdownMenu.Link
+                                        href="/logout"
+                                        method="post"
+                                    >
+                                        Logout{" "}
+                                    </DropdownMenu.Link>
                                 </DropdownMenu>
                             </>
                         ) : (

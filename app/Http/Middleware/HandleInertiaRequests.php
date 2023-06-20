@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
@@ -39,6 +41,10 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'categories_global' => Cache::rememberForever('categories_navbar', fn () => Category::whereHas('product')->get()->map(fn ($q) => [
+                'name' => $q->name,
+                'slug' => $q->slug,
+            ]) )
         ]);
     }
 }
