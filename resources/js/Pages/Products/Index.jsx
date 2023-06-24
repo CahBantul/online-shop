@@ -8,7 +8,7 @@ import Pagination from '@/Components/PAgination'
 
 export default function Index(props) {
   const {data: products, meta, links} = props.products
-  console.log(links);
+  
   return (
     <div>
          <Head title="Our Product" />

@@ -1,12 +1,17 @@
 import React from "react";
 import App from "@/Layouts/AppLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import { numberFormat } from "@/Libs/helper";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Container from "@/Components/Container";
+import { toast } from "react-hot-toast";
 
 export default function Show({ product }) {
-    console.log(product);
+    const addToCart =  () => {
+        router.post(route('cart.store', product), {}, {
+            onSuccess: () => toast.success('Added to cart'),
+          })
+    }
     return (
         <div>
             <Head title={product.name} />
@@ -31,7 +36,7 @@ export default function Show({ product }) {
                             </div>
                             <div className="font-semibold text-4xl"><sup>Rp</sup> {numberFormat(product.price)}</div>
                         </div>
-                            <PrimaryButton>Add to Card</PrimaryButton>
+                            <PrimaryButton onClick={addToCart}> <Link>Add to Card</Link> </PrimaryButton>
                     </div>
                 </div>
             </Container>

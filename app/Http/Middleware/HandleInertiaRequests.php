@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Cart;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -32,6 +33,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $carts_global_count = $request->user() ? Cache::rememberForever('carts_global_count', fn () => Cart::whereBelongsTo($request->user())->whereNull('paid_at')->count())  : null;
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
@@ -41,10 +43,11 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
-            'categories_global' => Cache::rememberForever('categories_navbar', fn () => Category::whereHas('product')->get()->map(fn ($q) => [
+            'categories_global' => Cache::rememberForever('categories_global', fn () => Category::whereHas('product')->get()->map(fn ($q) => [
                 'name' => $q->name,
                 'slug' => $q->slug,
-            ]) )
+            ])),
+            'carts_global_count' => $carts_global_count,
         ]);
     }
 }

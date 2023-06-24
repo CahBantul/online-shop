@@ -20,6 +20,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "clsx": "^1.2.1"
+        "@inertiajs/inertia": "^0.11.1",
+        "clsx": "^1.2.1",
+        "react-hot-toast": "^2.4.1"
     }
 }
