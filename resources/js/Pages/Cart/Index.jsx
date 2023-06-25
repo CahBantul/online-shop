@@ -7,6 +7,7 @@ import { numberFormat } from "@/Libs/helper";
 import { toast } from "react-hot-toast";
 import Table from "@/Components/Table";
 import Card from "@/Components/Card";
+import DropdownMenu from "@/Components/DropdownMenu";
 
 export default function Index({ carts }) {
     const onDeleteHandler = (card_id) => {
@@ -19,7 +20,9 @@ export default function Index({ carts }) {
         );
     };
 
-    let ppn = (11 / 100) * carts.reduce((acc, cart) => acc + cart.price, 0);
+    let subtotal = carts.reduce((acc, cart) => acc + cart.price, 0);
+    let ppn = (11 / 100) * subtotal;
+    let total = ppn + subtotal;
 
     return (
         <div>
@@ -105,14 +108,7 @@ export default function Index({ carts }) {
                                             <Table.Td></Table.Td>
                                             <Table.Td>Total</Table.Td>
                                             <Table.Td className="text-right">
-                                                Rp{" "}
-                                                {numberFormat(
-                                                    carts.reduce(
-                                                        (acc, cart) =>
-                                                            acc + cart.price,
-                                                        0
-                                                    ) + ppn
-                                                )}
+                                                Rp {numberFormat(total)}
                                             </Table.Td>
                                             <Table.Td></Table.Td>
                                         </Table.Tr>
@@ -138,6 +134,21 @@ export default function Index({ carts }) {
                         </Table>
                     </Card.Table>
                 </Card>
+
+                <div className="mt-4 flex justify-end">
+                    <DropdownMenu
+                        buttonClassName="bg-blue-600 text-white px-4 py-2 rounded-lg"
+                        label={"Payment method"}
+                    >
+                        <DropdownMenu.Link href='/invoice' method='POST' as='button' data={{ carts:carts, total:total, payment_type: 'BNI' }} >
+                            BNI Virtual Account
+                        </DropdownMenu.Link>
+                        <DropdownMenu.Link>
+                            BCA Virtual Account
+                        </DropdownMenu.Link>
+                        <DropdownMenu.Link>Gopay</DropdownMenu.Link>
+                    </DropdownMenu>
+                </div>
             </Container>
         </div>
     );
