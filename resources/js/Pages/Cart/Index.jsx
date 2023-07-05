@@ -135,20 +135,53 @@ export default function Index({ carts }) {
                     </Card.Table>
                 </Card>
 
-                <div className="mt-4 flex justify-end">
-                    <DropdownMenu
-                        buttonClassName="bg-blue-600 text-white px-4 py-2 rounded-lg"
-                        label={"Payment method"}
-                    >
-                        <DropdownMenu.Link href='/invoice' method='POST' as='button' data={{ carts:carts, total:total, payment_type: 'BNI' }} >
-                            BNI Virtual Account
-                        </DropdownMenu.Link>
-                        <DropdownMenu.Link>
-                            BCA Virtual Account
-                        </DropdownMenu.Link>
-                        <DropdownMenu.Link>Gopay</DropdownMenu.Link>
-                    </DropdownMenu>
-                </div>
+                {carts.length > 0 ? (
+                    <div className="mt-4 flex justify-end">
+                        <DropdownMenu
+                            buttonClassName="bg-blue-600 text-white px-4 py-2 rounded-lg"
+                            label={"Payment method"}
+                        >
+                            <DropdownMenu.Link
+                                href="/invoice"
+                                method="POST"
+                                as="button"
+                                data={{
+                                    carts: carts,
+                                    total: total,
+                                    payment_type: "gopay",
+                                }}
+                            >
+                                Gopay
+                            </DropdownMenu.Link>
+                            <DropdownMenu.Link
+                                href="/invoice"
+                                method="POST"
+                                as="button"
+                                data={{
+                                    carts: carts,
+                                    total: total,
+                                    payment_type: "bank_transfer",
+                                    bank: "bca",
+                                }}
+                            >
+                                BCA Virtual Account
+                            </DropdownMenu.Link>
+                            <DropdownMenu.Link
+                                href="/invoice"
+                                method="POST"
+                                as="button"
+                                data={{
+                                    carts: carts,
+                                    total: total,
+                                    payment_type: "bank_transfer",
+                                    bank: "bni",
+                                }}
+                            >
+                                BNI Virtual Account
+                            </DropdownMenu.Link>
+                        </DropdownMenu>
+                    </div>
+                ) : null}
             </Container>
         </div>
     );

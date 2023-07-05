@@ -38,6 +38,9 @@ export default function Navbar() {
                                     <DropdownMenu.Link href={"/cart"}>
                                         Your Cart
                                     </DropdownMenu.Link>
+                                    <DropdownMenu.Link href={"/products/me"}>
+                                        Your Products
+                                    </DropdownMenu.Link>
                                     <DropdownMenu.Link href={"/history"}>
                                         Your History
                                     </DropdownMenu.Link>

@@ -34,6 +34,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $carts_global_count = $request->user() ? Cache::rememberForever('carts_global_count', fn () => Cart::whereBelongsTo($request->user())->whereNull('paid_at')->count())  : null;
+        
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
@@ -47,6 +48,7 @@ class HandleInertiaRequests extends Middleware
                 'name' => $q->name,
                 'slug' => $q->slug,
             ])),
+
             'carts_global_count' => $carts_global_count,
         ]);
     }

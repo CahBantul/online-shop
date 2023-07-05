@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Cache;
 
 class CartController extends Controller
 {
-    public function __construct() 
-    {
-        $this->middleware('auth');    
-    }
     /**
      * Display a listing of the resource.
      */
@@ -22,6 +18,7 @@ class CartController extends Controller
         $carts = Cart::query()
             ->with('product')
             ->whereBelongsTo($request->user())
+            ->whereNull('paid_at')
             ->get();
 
         return inertia('Cart/Index', [
@@ -52,6 +49,8 @@ class CartController extends Controller
         ]);
 
         Cache::forget('carts_global_count');
+
+        return redirect('/carts');
 
 
     }
