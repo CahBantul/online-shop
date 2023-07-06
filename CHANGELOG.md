@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/CahBantul/online-shop/compare/v1.0.0...v1.1.0) (2023-07-06)
+
+
+### Features
+
+* adding version ([e6f57cc](https://github.com/CahBantul/online-shop/commit/e6f57cc0678db888d6c1f483bb9f713e745b05b9))
+
+
+### Bug Fixes
+
+* fix price tax ([abf24ac](https://github.com/CahBantul/online-shop/commit/abf24aca3decf5c80bce77b7a1c0df2e814dfeac))
+
 ## 1.0.0 (2023-07-06)
 
 
