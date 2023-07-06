@@ -14,8 +14,7 @@ export default function Navbar() {
                 <div className="flex justify-between items-center">
                     <ApplicationLogo className="w-8 h-8 fill-red-500" />
                     <div className="flex items-center gap-x-6">
-                        <NavLink href="/">Home </NavLink>
-                        <NavLink href="/products">Products </NavLink>
+                        <NavLink href="/products">Home </NavLink>
                         <DropdownMenu label={"Categories"}>
                             {categories_global.map((category) => (
                                 <DropdownMenu.Link
@@ -29,20 +28,11 @@ export default function Navbar() {
                         {auth.user ? (
                             <>
                                 <DropdownMenu label={auth.user.name}>
-                                    <DropdownMenu.Link href={"/dashboard"}>
-                                        Dashboard
-                                    </DropdownMenu.Link>
-                                    <DropdownMenu.Link href={"/profile"}>
-                                        Profile
-                                    </DropdownMenu.Link>
                                     <DropdownMenu.Link href={"/cart"}>
                                         Your Cart
                                     </DropdownMenu.Link>
                                     <DropdownMenu.Link href={"/products/me"}>
                                         Your Products
-                                    </DropdownMenu.Link>
-                                    <DropdownMenu.Link href={"/history"}>
-                                        Your History
                                     </DropdownMenu.Link>
                                     <DropdownMenu.Link
                                         href="/logout"
