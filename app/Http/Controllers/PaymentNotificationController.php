@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\InvoicePaid;
 use App\Models\Cart;
 use App\Models\Invoice;
 use App\Models\User;
@@ -16,6 +17,7 @@ class PaymentNotificationController extends Controller
         
         if ($request->signature_key == $signature_key){
             $invoice->update([
+                'status' => $request->transaction_status,
                 'succeeded_at' => $request->settlement_time
             ]);
 
@@ -27,11 +29,15 @@ class PaymentNotificationController extends Controller
 
 
             $product_ids =  $cartQuery->pluck('product_id');
+
             if($request->transaction_status == "settlement"){
                 $user = User::find($invoice->user_id);
                 $user->products()->attach($product_ids);
                 Cache::forget('carts_global_count');
+
+                broadcast(new InvoicePaid($invoice));
             }
+            
         }
     }
 }

@@ -6,12 +6,16 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import Container from "@/Components/Container";
 import { toast } from "react-hot-toast";
 
-export default function Show({ product }) {
-    const addToCart =  () => {
-        router.post(route('cart.store', product), {}, {
-            onSuccess: () => toast.success('Added to cart'),
-          })
-    }
+export default function Show({ product, auth, isProductBought }) {
+    const addToCart = () => {
+        router.post(
+            route("cart.store", product),
+            {},
+            {
+                onSuccess: () => toast.success("Added to cart"),
+            }
+        );
+    };
     return (
         <div>
             <Head title={product.name} />
@@ -26,7 +30,7 @@ export default function Show({ product }) {
                                 href={`/products?category=${product.category.slug}`}
                                 className="text-xs font-semibold px-2 py-1 inline-flex bg-blue-500 text-white rounded"
                             >
-                                    {product.category.name}
+                                {product.category.name}
                             </Link>
                             <h1 className="text-3xl font-semibold">
                                 {product.name}
@@ -34,9 +38,29 @@ export default function Show({ product }) {
                             <div className="leading-relaxed text-gray-500 my-4">
                                 {product.description}
                             </div>
-                            <div className="font-semibold text-4xl"><sup>Rp</sup> {numberFormat(product.price)}</div>
+                            <div className="font-semibold text-4xl">
+                                <sup>Rp</sup> {numberFormat(product.price)}
+                            </div>
                         </div>
-                            <PrimaryButton onClick={addToCart}> <Link>Add to Card</Link> </PrimaryButton>
+                        {auth.user ? (
+                            <>
+                                {isProductBought ? (
+                                    <PrimaryButton>
+                                        <Link href={"/products/me"}>
+                                            Already Bought
+                                        </Link>
+                                    </PrimaryButton>
+                                ) : (
+                                    <PrimaryButton onClick={addToCart}>
+                                        Add to Card
+                                    </PrimaryButton>
+                                )}
+                            </>
+                        ) : (
+                            <PrimaryButton onClick={addToCart}>
+                                Add to Card
+                            </PrimaryButton>
+                        )}
                     </div>
                 </div>
             </Container>

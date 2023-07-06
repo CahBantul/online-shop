@@ -50,10 +50,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(Request $request, Product $product)
     {
+        $isProductBought = $request->user() ? $request->user()->products()->find($product->id) : null;
+
         return Inertia('Products/Show', [
-            'product' => ProductSingleResource::make($product->load('category'))
+            'product' => ProductSingleResource::make($product->load('category')),
+            'isProductBought' => $isProductBought
         ]);
     }
 
