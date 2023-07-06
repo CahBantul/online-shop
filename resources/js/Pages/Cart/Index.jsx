@@ -22,7 +22,7 @@ export default function Index({ carts }) {
 
     let subtotal = carts.reduce((acc, cart) => acc + cart.price, 0);
     let ppn = (11 / 100) * subtotal;
-    let total = ppn + subtotal;
+    let total = carts.reduce((acc, cart) => acc + cart.price_tax, 0);
 
     return (
         <div>

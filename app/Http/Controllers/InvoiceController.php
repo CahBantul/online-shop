@@ -26,7 +26,7 @@ class InvoiceController extends Controller
         if ($invoiceExists) {
             return to_route('invoice.show', $invoiceExists);
         } else {
-            $invoice = Auth::user()->invoices()->updateOrCreate(compact('order_id'), [
+            $invoice = $request->user()->invoices()->updateOrCreate(compact('order_id'), [
                 "order_id" => $order_id,
                 "gross_amount" => $total,
                 "cart_ids" => $cart_ids,
