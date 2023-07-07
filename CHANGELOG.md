@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/CahBantul/online-shop/compare/v1.1.0...v1.2.0) (2023-07-07)
+
+
+### Features
+
+* add laravel sail for docker container ([15b1349](https://github.com/CahBantul/online-shop/commit/15b1349cd4221130e59ab14c5667ed409b4de28c))
+* add schedule for queue ([32aef06](https://github.com/CahBantul/online-shop/commit/32aef06b5366382f915c188f4472f62787e87038))
+
 ## [1.1.0](https://github.com/CahBantul/online-shop/compare/v1.0.0...v1.1.0) (2023-07-06)
 
 
